@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo -n "Enter session id: "
+read session_id
+
+for year in {2015..2022}; do
+	mkdir -p "input/$year"
+
+	for day in {1..25}; do
+		curl \
+			"https://adventofcode.com/$year/day/$day/input" \
+			--cookie "session=$session_id" \
+			-o "input/$year/$day.txt"
+
+		# dont spam his server, he does good work for us!
+		sleep 1
+	done
+done

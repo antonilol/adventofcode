@@ -1,7 +1,7 @@
 use adventofcode::ext::CellExt;
 use core::cell::Cell;
 
-const INPUT: &str = include_str!("../../input/2023_4.txt");
+const INPUT: &str = include_str!("../../input/2023/4.txt");
 
 fn main() {
     let answer_1 = INPUT.lines().fold(0, |acc, line| {

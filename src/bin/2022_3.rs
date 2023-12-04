@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("../../input/2022_3.txt");
+const INPUT: &str = include_str!("../../input/2022/3.txt");
 
 fn priority(item_type: u8) -> u32 {
     (match item_type {

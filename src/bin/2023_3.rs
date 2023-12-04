@@ -1,6 +1,6 @@
 use std::{collections::HashMap, str};
 
-const INPUT: &str = include_str!("../../input/2023_3.txt");
+const INPUT: &str = include_str!("../../input/2023/3.txt");
 
 enum CharType {
     Empty,

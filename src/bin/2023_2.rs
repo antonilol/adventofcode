@@ -1,6 +1,6 @@
 use core::cmp::max;
 
-const INPUT: &str = include_str!("../../input/2023_2.txt");
+const INPUT: &str = include_str!("../../input/2023/2.txt");
 
 fn main() {
     let answer_1 = INPUT.lines().fold(0, |acc, line| {

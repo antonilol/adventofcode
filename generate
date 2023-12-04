@@ -1,11 +1,16 @@
 #!/bin/bash
 
-echo -n "Enter name: "
-read name
+echo -n "Enter year: "
+read year
+echo -n "Enter day: "
+read day
 
-if [ -e "src/bin/$name.rs" ]; then
+code="src/bin/${year}_$day.rs"
+input="$year/$day"
+
+if [ -e "$code" ]; then
 	echo "File already exists, if you want to overwrite it go edit this script and remove the check"
 	exit 1
 fi
 
-sed 's/{{NAME}}/'"$name"'/g' template > "src/bin/$name.rs"
+sed 's!{{NAME}}!'"$input"'!g' template > "$code"

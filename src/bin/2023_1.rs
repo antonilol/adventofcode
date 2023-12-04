@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("../../input/2023_1.txt");
+const INPUT: &str = include_str!("../../input/2023/1.txt");
 
 fn digit(sl: &[u8]) -> Option<u8> {
     const NUMBERS: &[&str] = &[

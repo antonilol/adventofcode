@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("../../input/2022_2.txt");
+const INPUT: &str = include_str!("../../input/2022/2.txt");
 
 #[derive(Debug, Clone, Copy)]
 enum Outcome {
