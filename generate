@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo -n "Enter name: "
+read name
+
+if [ -e "src/bin/$name.rs" ]; then
+	echo "File already exists, if you want to overwrite it go edit this script and remove the check"
+	exit 1
+fi
+
+sed 's/{{NAME}}/'"$name"'/g' template > "src/bin/$name.rs"
