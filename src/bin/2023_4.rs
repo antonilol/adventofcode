@@ -1,4 +1,4 @@
-use adventofcode::ext::CellExt;
+use adventofcode::ext::cell::CellExt;
 use core::cell::Cell;
 
 const INPUT: &str = include_str!("../../input/2023/4.txt");
