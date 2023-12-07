@@ -3,42 +3,6 @@ use core::{
     mem::{transmute_copy, MaybeUninit},
 };
 
-pub trait IterExt: Iterator {
-    fn chunks_const_generic<const N: usize, C: CheckType>(self) -> ChunksExact<Self, N, C>
-    where
-        Self: Sized;
-
-    fn chunks_const<const N: usize>(self) -> ChunksExact<Self, N, NoCheck>
-    where
-        Self: Sized,
-    {
-        Self::chunks_const_generic(self)
-    }
-
-    fn chunks_const_debug_check<const N: usize>(self) -> ChunksExact<Self, N, DebugCheck>
-    where
-        Self: Sized,
-    {
-        Self::chunks_const_generic(self)
-    }
-
-    fn chunks_const_check<const N: usize>(self) -> ChunksExact<Self, N, Check>
-    where
-        Self: Sized,
-    {
-        Self::chunks_const_generic(self)
-    }
-}
-
-impl<T: Iterator> IterExt for T {
-    fn chunks_const_generic<const N: usize, C: CheckType>(self) -> ChunksExact<Self, N, C>
-    where
-        Self: Sized,
-    {
-        ChunksExact(self, PhantomData)
-    }
-}
-
 pub trait CheckType {
     fn handle_invalid_state(n: usize, i: usize);
 }
@@ -55,6 +19,9 @@ impl CheckType for DebugCheck {
     fn handle_invalid_state(n: usize, i: usize) {
         #[cfg(debug_assertions)]
         Check::handle_invalid_state(n, i);
+
+        // parameters are unused in release mode
+        let _ = (n, i);
     }
 }
 
@@ -66,7 +33,10 @@ impl CheckType for Check {
     }
 }
 
-pub struct ChunksExact<I: Iterator, const N: usize, C: CheckType>(I, PhantomData<C>);
+pub struct ChunksExact<I: Iterator, const N: usize, C: CheckType>(
+    pub(super) I,
+    pub(super) PhantomData<C>,
+);
 
 impl<I: Iterator, const N: usize, C: CheckType> Iterator for ChunksExact<I, N, C> {
     type Item = [I::Item; N];
@@ -111,7 +81,7 @@ unsafe fn array_assume_init<T, const N: usize>(array: [MaybeUninit<T>; N]) -> [T
 
 #[cfg(test)]
 mod tests {
-    use super::IterExt;
+    use super::super::IterExt;
 
     #[test]
     fn test_chunk_iter() {

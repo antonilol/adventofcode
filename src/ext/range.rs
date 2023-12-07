@@ -10,6 +10,10 @@ pub trait RangeExt<T> {
     fn is_valid(&self) -> bool
     where
         T: Ord;
+
+    fn overlaps_with(&self, other: &Self) -> bool
+    where
+        T: Ord;
 }
 
 impl<T> RangeExt<T> for Range<T> {
@@ -29,5 +33,12 @@ impl<T> RangeExt<T> for Range<T> {
         T: Ord,
     {
         self.start <= self.end
+    }
+
+    fn overlaps_with(&self, other: &Self) -> bool
+    where
+        T: Ord,
+    {
+        self.start < other.end && other.start < self.end
     }
 }

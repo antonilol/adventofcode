@@ -1,3 +1,5 @@
+use adventofcode::ext::range::RangeExt;
+
 const INPUT: &str = include_str!("../../input/2023/5.txt");
 
 fn main() {
@@ -81,7 +83,7 @@ fn main() {
             }
 
             for (from, to) in &map {
-                if a.end > from.start && a.start < from.end {
+                if a.overlaps_with(from) {
                     if a.start < from.start {
                         let part = a.start..from.start;
                         a.start = from.start;
