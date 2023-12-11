@@ -1,9 +1,22 @@
 #!/bin/bash
 
-echo -n "Enter year: "
+today_year=$(date "+%Y")
+
+echo -n "Enter year (default: $today_year): "
 read year
-echo -n "Enter day: "
+
+if [ -z "$year" ]; then
+	year=$today_year
+fi
+
+today=$(date "+%d")
+
+echo -n "Enter day (default: $today): "
 read day
+
+if [ -z "$day" ]; then
+	day=$today
+fi
 
 code="src/bin/${year}_$day.rs"
 input="$year/$day"
