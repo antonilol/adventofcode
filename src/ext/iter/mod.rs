@@ -1,7 +1,10 @@
 pub mod chunks;
-// pub mod parse; // WIP
+pub mod parse;
 
-use self::chunks::{Check, CheckType, ChunksExact, DebugCheck, NoCheck};
+use self::{
+    chunks::{Check, CheckType, ChunksExact, DebugCheck, NoCheck},
+    parse::{parse_int, ParseIntError, ParseIntTo},
+};
 use core::marker::PhantomData;
 
 pub trait IterExt: Iterator {
@@ -31,6 +34,13 @@ pub trait IterExt: Iterator {
         Self: Sized,
     {
         Self::chunks_const_generic(self)
+    }
+
+    fn parse_int<N: ParseIntTo>(self) -> Result<N, ParseIntError>
+    where
+        Self: Iterator<Item = u8> + Sized,
+    {
+        parse_int(self)
     }
 }
 
