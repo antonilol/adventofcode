@@ -4,4 +4,5 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+cached = "0.46.1"
 num-traits = "0.2.17"
