@@ -1,3 +1,5 @@
+use adventofcode::ext::str::StrExt;
+
 const INPUT: &str = include_str!("../../input/2023/14.txt");
 
 #[derive(Clone, Copy, PartialEq)]
@@ -91,19 +93,12 @@ fn slide(map: &mut [Vec<Object>]) {
 }
 
 fn main() {
-    let mut map = INPUT
-        .lines()
-        .map(|l| {
-            l.bytes()
-                .map(|b| match b {
-                    b'O' => Object::RoundedRock,
-                    b'#' => Object::CubeRock,
-                    b'.' => Object::Empty,
-                    _ => unreachable!(),
-                })
-                .collect::<Vec<_>>()
-        })
-        .collect::<Vec<_>>();
+    let mut map = INPUT.map_2d_vec(|b| match b {
+        b'O' => Object::RoundedRock,
+        b'#' => Object::CubeRock,
+        b'.' => Object::Empty,
+        _ => unreachable!(),
+    });
 
     slide_north(&mut map);
 

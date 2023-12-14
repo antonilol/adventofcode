@@ -1,4 +1,4 @@
-use core::mem::replace;
+use core::{iter::FusedIterator, mem::replace};
 
 pub struct Sequence<T, F: FnMut(&T) -> T> {
     curr: T,
@@ -23,6 +23,8 @@ impl<T, F: FnMut(&T) -> T> Iterator for Sequence<T, F> {
         Some(replace(&mut self.curr, new))
     }
 }
+
+impl<T, F: FnMut(&T) -> T> FusedIterator for Sequence<T, F> {}
 
 #[cfg(test)]
 mod tests {

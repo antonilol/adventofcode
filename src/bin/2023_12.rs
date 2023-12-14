@@ -1,3 +1,4 @@
+use adventofcode::ext::{iter::IterExt, str::StrExt};
 use cached::proc_macro::cached;
 
 const INPUT: &str = include_str!("../../input/2023/12.txt");
@@ -57,23 +58,14 @@ fn arrangements(pat: &'static [Status], n: &'static [u64]) -> u64 {
 fn main() {
     let answer_1 = INPUT.lines().fold(0, |acc, line| {
         let mut split = line.split(' ');
-        let l = split
-            .next()
-            .unwrap()
-            .bytes()
-            .map(|b| match b {
-                b'#' => Status::Broken,
-                b'.' => Status::Operational,
-                b'?' => Status::Unknown,
-                _ => unreachable!(),
-            })
-            .collect::<Vec<_>>();
-        let n = split
-            .next()
-            .unwrap()
-            .split(',')
-            .map(|s| s.parse::<u64>().unwrap())
-            .collect::<Vec<_>>();
+        let l = split.next().unwrap().map_1d_vec(|b| match b {
+            b'#' => Status::Broken,
+            b'.' => Status::Operational,
+            b'?' => Status::Unknown,
+            _ => unreachable!(),
+        });
+
+        let n = split.next().unwrap().split(',').parse_all::<u64>().unwrap();
         let z = split.next();
         debug_assert!(z.is_none());
 
@@ -82,17 +74,13 @@ fn main() {
 
     let answer_2 = INPUT.lines().fold(0, |acc, line| {
         let mut split = line.split(' ');
-        let l = split
-            .next()
-            .unwrap()
-            .bytes()
-            .map(|b| match b {
-                b'#' => Status::Broken,
-                b'.' => Status::Operational,
-                b'?' => Status::Unknown,
-                _ => unreachable!(),
-            })
-            .collect::<Vec<_>>();
+        let l = split.next().unwrap().map_1d_vec(|b| match b {
+            b'#' => Status::Broken,
+            b'.' => Status::Operational,
+            b'?' => Status::Unknown,
+            _ => unreachable!(),
+        });
+
         let mut l_x5 = Vec::new();
         l_x5.extend_from_slice(&l);
         l_x5.push(Status::Unknown);
@@ -104,12 +92,9 @@ fn main() {
         l_x5.push(Status::Unknown);
         l_x5.extend_from_slice(&l);
         let l = l_x5;
-        let n = split
-            .next()
-            .unwrap()
-            .split(',')
-            .map(|s| s.parse::<u64>().unwrap())
-            .collect::<Vec<_>>();
+
+        let n = split.next().unwrap().split(',').parse_all::<u64>().unwrap();
+
         let mut n_x5 = Vec::new();
         n_x5.extend_from_slice(&n);
         n_x5.extend_from_slice(&n);
@@ -117,6 +102,7 @@ fn main() {
         n_x5.extend_from_slice(&n);
         n_x5.extend_from_slice(&n);
         let n = n_x5;
+
         let z = split.next();
         debug_assert!(z.is_none());
 
