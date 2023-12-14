@@ -1,7 +1,8 @@
-use adventofcode::ext::{iter::IterExt, str::StrExt};
+use adventofcode::{
+    day,
+    ext::{iter::IterExt, str::StrExt},
+};
 use cached::proc_macro::cached;
-
-const INPUT: &str = include_str!("../../input/2023/12.txt");
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 enum Status {
@@ -55,8 +56,8 @@ fn arrangements(pat: &'static [Status], n: &'static [u64]) -> u64 {
     }
 }
 
-fn main() {
-    let answer_1 = INPUT.lines().fold(0, |acc, line| {
+fn solve(input: &str) -> (u64, u64) {
+    let answer_1 = input.lines().fold(0, |acc, line| {
         let mut split = line.split(' ');
         let l = split.next().unwrap().map_1d_vec(|b| match b {
             b'#' => Status::Broken,
@@ -72,7 +73,7 @@ fn main() {
         acc + arrangements(Vec::leak(l), Vec::leak(n))
     });
 
-    let answer_2 = INPUT.lines().fold(0, |acc, line| {
+    let answer_2 = input.lines().fold(0, |acc, line| {
         let mut split = line.split(' ');
         let l = split.next().unwrap().map_1d_vec(|b| match b {
             b'#' => Status::Broken,
@@ -109,5 +110,7 @@ fn main() {
         acc + arrangements(Vec::leak(l), Vec::leak(n))
     });
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 12, 7633, 23903579139437);

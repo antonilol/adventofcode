@@ -1,10 +1,8 @@
-use adventofcode::ext::cell::CellExt;
+use adventofcode::{day, ext::cell::CellExt};
 use core::cell::Cell;
 
-const INPUT: &str = include_str!("../../input/2023/4.txt");
-
-fn main() {
-    let answer_1 = INPUT.lines().fold(0, |acc, line| {
+fn solve(input: &str) -> (u32, u32) {
+    let answer_1 = input.lines().fold(0, |acc, line| {
         let mut split = line.split(' ').filter(|s| !s.is_empty());
 
         let next = split.next();
@@ -38,7 +36,7 @@ fn main() {
         acc + score
     });
 
-    let cards = INPUT
+    let cards = input
         .lines()
         .map(|line| {
             let mut split = line.split(' ').filter(|s| !s.is_empty());
@@ -85,5 +83,7 @@ fn main() {
         }
     }
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 4, 23673, 12263631);

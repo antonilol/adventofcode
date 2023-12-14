@@ -1,9 +1,8 @@
+use adventofcode::day;
 use core::cmp::max;
 
-const INPUT: &str = include_str!("../../input/2023/2.txt");
-
-fn main() {
-    let answer_1 = INPUT.lines().fold(0, |acc, line| {
+fn solve(input: &str) -> (u32, u32) {
+    let answer_1 = input.lines().fold(0, |acc, line| {
         let mut a = line.split(": ");
         let game = a.next().unwrap();
         debug_assert!(game.starts_with("Game "));
@@ -38,7 +37,7 @@ fn main() {
         acc + game_id
     });
 
-    let answer_2 = INPUT.lines().fold(0, |acc, line| {
+    let answer_2 = input.lines().fold(0, |acc, line| {
         let mut a = line.split(": ");
         a.next();
         let items = a
@@ -70,5 +69,7 @@ fn main() {
         acc + r * g * b
     });
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 2, 2545, 78111);

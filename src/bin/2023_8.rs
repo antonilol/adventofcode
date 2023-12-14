@@ -1,6 +1,5 @@
+use adventofcode::day;
 use std::collections::HashMap;
-
-const INPUT: &str = include_str!("../../input/2023/8.txt");
 
 fn lcm(a: u64, b: u64) -> u64 {
     a * b / gcd(a, b)
@@ -40,8 +39,8 @@ fn steps(instr: &[u8], network: &HashMap<&str, (&str, &str)>, start: &str, part2
     answer_1
 }
 
-fn main() {
-    let mut split = INPUT.lines();
+fn solve(input: &str) -> (u64, u64) {
+    let mut split = input.lines();
     let instr = split.next().unwrap().as_bytes();
     split.next(); //empty lines
     let network = split
@@ -57,5 +56,7 @@ fn main() {
         .reduce(lcm)
         .unwrap();
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 8, 13207, 12324145107121);

@@ -1,6 +1,4 @@
-use adventofcode::ext::str::StrExt;
-
-const INPUT: &str = include_str!("../../input/2023/14.txt");
+use adventofcode::{day, ext::str::StrExt};
 
 #[derive(Clone, Copy, PartialEq)]
 enum Object {
@@ -92,8 +90,8 @@ fn slide(map: &mut [Vec<Object>]) {
     slide_east(map);
 }
 
-fn main() {
-    let mut map = INPUT.map_2d_vec(|b| match b {
+fn solve(input: &str) -> (usize, usize) {
+    let mut map = input.map_2d_vec(|b| match b {
         b'O' => Object::RoundedRock,
         b'#' => Object::CubeRock,
         b'.' => Object::Empty,
@@ -132,5 +130,7 @@ fn main() {
             * (y + 1)
     });
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 14, 105249, 88680);

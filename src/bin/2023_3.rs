@@ -1,6 +1,5 @@
+use adventofcode::day;
 use std::{collections::HashMap, str};
-
-const INPUT: &str = include_str!("../../input/2023/3.txt");
 
 enum CharType {
     Empty,
@@ -18,8 +17,8 @@ impl CharType {
     }
 }
 
-fn main() {
-    let mut lines = INPUT.lines().map(|s| {
+fn solve(input: &str) -> (u32, u32) {
+    let mut lines = input.lines().map(|s| {
         let mut ret = String::with_capacity(s.len() + 2);
         ret.push('.');
         ret.push_str(s);
@@ -151,5 +150,7 @@ fn main() {
         })
         .sum::<u32>();
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 3, 525119, 76504829);

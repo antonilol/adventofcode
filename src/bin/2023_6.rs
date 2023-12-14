@@ -1,7 +1,7 @@
-const INPUT: &str = include_str!("../../input/2023/6.txt");
+use adventofcode::day;
 
-fn main() {
-    let mut lines = INPUT.lines();
+fn solve(input: &str) -> (usize, usize) {
+    let mut lines = input.lines();
     let time = lines
         .next()
         .unwrap()
@@ -26,7 +26,7 @@ fn main() {
         })
         .product::<usize>();
 
-    let mut lines = INPUT.lines();
+    let mut lines = input.lines();
     let time = lines
         .next()
         .unwrap()
@@ -56,5 +56,7 @@ fn main() {
         .filter(|&t_button| (time - t_button) * t_button > distance)
         .count();
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 6, 2374848, 39132886);

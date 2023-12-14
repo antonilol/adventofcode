@@ -1,7 +1,6 @@
+use adventofcode::day;
 use core::cmp::Ordering;
 use std::collections::BTreeMap;
-
-const INPUT: &str = include_str!("../../input/2023/7.txt");
 
 mod part1 {
     use super::HandType;
@@ -254,8 +253,8 @@ impl Ord for HandType {
     }
 }
 
-fn main() {
-    let map = INPUT
+fn solve(input: &str) -> (usize, usize) {
+    let map = input
         .lines()
         .map(|line| {
             let mut split = line.split(' ');
@@ -271,7 +270,7 @@ fn main() {
         .map(|(i, bid)| bid * (i + 1))
         .sum::<usize>();
 
-    let map = INPUT
+    let map = input
         .lines()
         .map(|line| {
             let mut split = line.split(' ');
@@ -287,5 +286,7 @@ fn main() {
         .map(|(i, bid)| bid * (i + 1))
         .sum::<usize>();
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 7, 252052080, 252898370);

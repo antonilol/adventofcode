@@ -1,7 +1,5 @@
-use adventofcode::ext::str::StrExt;
+use adventofcode::{day, ext::str::StrExt};
 use core::cmp::min;
-
-const INPUT: &str = include_str!("../../input/2023/13.txt");
 
 #[derive(Clone, Copy, PartialEq)]
 enum TerrainItem {
@@ -52,8 +50,8 @@ fn vertical(lines: &[Vec<TerrainItem>], orig: usize) -> usize {
     0
 }
 
-fn main() {
-    let (answer_1, answer_2) = INPUT.split("\n\n").fold((0, 0), |mut acc, pat| {
+fn solve(input: &str) -> (usize, usize) {
+    input.split("\n\n").fold((0, 0), |mut acc, pat| {
         let mut lines = pat.map_2d_vec(|b| match b {
             b'.' => TerrainItem::Ash,
             b'#' => TerrainItem::Rocks,
@@ -96,7 +94,7 @@ fn main() {
         }
 
         panic!("no new reflection line");
-    });
-
-    println!("answers: {answer_1} {answer_2}");
+    })
 }
+
+day!(2023 13, 40006, 28627);

@@ -1,7 +1,7 @@
-const INPUT: &str = include_str!("../../input/2023/9.txt");
+use adventofcode::day;
 
-fn main() {
-    let (answer_1, answer_2) = INPUT.lines().fold((0, 0), |acc, line| {
+fn solve(input: &str) -> (i64, i64) {
+    let (answer_1, answer_2) = input.lines().fold((0, 0), |acc, line| {
         let mut all_zeros = true;
         let mut numbers = vec![line
             .split(' ')
@@ -43,5 +43,7 @@ fn main() {
         (acc.0 + v1, acc.1 + v2)
     });
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 9, 1898776583, 1100);

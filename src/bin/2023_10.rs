@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("../../input/2023/10.txt");
+use adventofcode::day;
 
 #[derive(Clone, Copy, Default)]
 struct Pipe {
@@ -111,9 +111,9 @@ fn is_enclosed(pipe_network: &[Vec<Pipe>], x: usize, y: usize) -> bool {
     })
 }
 
-fn main() {
+fn solve(input: &str) -> (usize, usize) {
     let mut start = None;
-    let mut pipe_network = INPUT
+    let mut pipe_network = input
         .lines()
         .enumerate()
         .map(|(y, line)| {
@@ -186,5 +186,7 @@ fn main() {
         }
     }
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 10, 6956, 455);

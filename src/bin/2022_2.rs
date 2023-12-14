@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("../../input/2022/2.txt");
+use adventofcode::day;
 
 #[derive(Debug, Clone, Copy)]
 enum Outcome {
@@ -66,15 +66,15 @@ impl Shape {
     }
 }
 
-fn main() {
-    let answer_1 = INPUT.lines().fold(0, |acc, line| {
+fn solve(input: &str) -> (u32, u32) {
+    let answer_1 = input.lines().fold(0, |acc, line| {
         let &[a, _space, b] = line.as_bytes() else {
             unreachable!();
         };
         acc + Shape::round_score(Shape::from(a), Shape::from(b))
     });
 
-    let answer_2 = INPUT.lines().fold(0, |acc, line| {
+    let answer_2 = input.lines().fold(0, |acc, line| {
         let &[a, _space, outcome] = line.as_bytes() else {
             unreachable!();
         };
@@ -82,5 +82,7 @@ fn main() {
         acc + Shape::round_score(a, Shape::choose(a, Outcome::from(outcome)))
     });
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2022 2, 11150, 8295);

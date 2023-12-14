@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("../../input/2023/11.txt");
+use adventofcode::day;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum Field {
@@ -7,8 +7,8 @@ enum Field {
     Emptyx999999,
 }
 
-fn main() {
-    let mut image = INPUT
+fn solve(input: &str) -> (usize, usize) {
+    let mut image = input
         .lines()
         .map(|line| {
             line.bytes()
@@ -89,5 +89,7 @@ fn main() {
         }
     }
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 11, 9684228, 483844716556);

@@ -1,4 +1,4 @@
-const INPUT: &str = include_str!("../../input/2022/3.txt");
+use adventofcode::day;
 
 fn priority(item_type: u8) -> u32 {
     (match item_type {
@@ -8,8 +8,8 @@ fn priority(item_type: u8) -> u32 {
     }) as u32
 }
 
-fn main() {
-    let answer_1 = INPUT.lines().fold(0, |acc, line| {
+fn solve(input: &str) -> (u32, u32) {
+    let answer_1 = input.lines().fold(0, |acc, line| {
         let (c1, c2) = line.as_bytes().split_at(line.len() / 2);
 
         acc + c1
@@ -20,7 +20,7 @@ fn main() {
             .sum::<u32>()
     });
 
-    let answer_2 = INPUT
+    let answer_2 = input
         .lines()
         .map(|str| str.as_bytes())
         .collect::<Vec<_>>()
@@ -37,5 +37,7 @@ fn main() {
             acc + priority(badge)
         });
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2022 3, 7889, 2825);

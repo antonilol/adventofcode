@@ -1,9 +1,7 @@
-use adventofcode::ext::range::RangeExt;
+use adventofcode::{day, ext::range::RangeExt};
 
-const INPUT: &str = include_str!("../../input/2023/5.txt");
-
-fn main() {
-    let mut blocks = INPUT.split("\n\n");
+fn solve(input: &str) -> (u64, u64) {
+    let mut blocks = input.split("\n\n");
 
     let mut seeds = blocks
         .next()
@@ -42,7 +40,7 @@ fn main() {
 
     // part 2
 
-    let mut blocks = INPUT.split("\n\n");
+    let mut blocks = input.split("\n\n");
 
     let mut seeds = blocks
         .next()
@@ -117,5 +115,7 @@ fn main() {
     });
     let answer_2 = seeds.into_iter().map(|r| r.start).min().unwrap();
 
-    println!("answers: {answer_1} {answer_2}");
+    (answer_1, answer_2)
 }
+
+day!(2023 5, 218513636, 81956384);
