@@ -19,11 +19,10 @@ if [ -z "$day" ]; then
 fi
 
 code="src/bin/${year}_$day.rs"
-input="$year/$day"
 
 if [ -e "$code" ]; then
 	echo "File already exists, if you want to overwrite it go edit this script and remove the check"
 	exit 1
 fi
 
-sed 's!{{NAME}}!'"$input"'!g' template > "$code"
+cat template <(echo -e "\nday!($year $day);") > "$code"

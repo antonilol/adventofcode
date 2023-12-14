@@ -9,13 +9,11 @@ macro_rules! day {
 
         fn main() {
             let (answer_1, answer_2) = solve(INPUT);
-            println!("answers:          {answer_1} {answer_2}");
+            println!("answers:          {answer_1} {answer_2}\nno expected answers");
         }
 
         #[cfg(test)]
         mod tests {
-            use super::{solve, INPUT};
-
             #[test]
             fn test_expected_answers() {
                 panic!(concat!("no expected answers for ", $y, " ", $d, "!"));
@@ -27,8 +25,10 @@ macro_rules! day {
 
         fn main() {
             let (answer_1, answer_2) = solve(INPUT);
-            println!("answers:          {answer_1} {answer_2}");
-            println!(concat!("expected answers: ", $a1, " ", $a2));
+            println!(
+                concat!("answers:          {} {}\nexpected answers: ", $a1, " ", $a2),
+                answer_1, answer_2
+            );
         }
 
         #[cfg(test)]
