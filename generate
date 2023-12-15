@@ -25,4 +25,4 @@ if [ -e "$code" ]; then
 	exit 1
 fi
 
-cat template <(echo -e "\nday!($year $day);") > "$code"
+cat template.rs <(echo -e "\nday!($year $day);") > "$code"
