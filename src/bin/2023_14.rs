@@ -1,4 +1,7 @@
-use adventofcode::{day, ext::str::StrExt};
+use adventofcode::{
+    day,
+    ext::{intoiterator::IntoIteratorExt, str::StrExt},
+};
 
 #[derive(Clone, Copy, PartialEq)]
 enum Object {
@@ -122,12 +125,12 @@ fn solve(input: &str) -> (usize, usize) {
     };
     let map = &snapshots[pos + (999999999 - pos) % (snapshots.len() - pos)];
 
-    let answer_2 = map.iter().rev().enumerate().fold(0, |acc, (y, row)| {
-        acc + row
-            .iter()
-            .filter(|o| matches!(o, Object::RoundedRock))
-            .count()
-            * (y + 1)
+    let answer_2 = map.fold_2d(0, |acc, obj, (_x, y)| {
+        acc + if matches!(obj, Object::RoundedRock) {
+            map.len() - y
+        } else {
+            0
+        }
     });
 
     (answer_1, answer_2)

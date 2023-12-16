@@ -1,4 +1,8 @@
-use adventofcode::{day, dir::Direction, ext::str::StrExt};
+use adventofcode::{
+    day,
+    dir::Direction,
+    ext::{intoiterator::IntoIteratorExt, str::StrExt},
+};
 use core::{cmp::max, mem::take};
 
 enum TileType {
@@ -109,15 +113,15 @@ fn energized_tiles(map: &mut [Vec<Tile>], start: ((i32, i32), Direction)) -> usi
         beams.append(&mut new);
     }
 
-    map.iter_mut().fold(0, |acc, row| {
-        row.iter_mut().fold(acc, |acc, tile| {
+    map.iter_mut()
+        .map(|row| row.iter_mut())
+        .fold_2d(0, |acc, tile, _| {
             acc + if take(&mut tile.energized_dirs).iter().any(|&a| a) {
                 1
             } else {
                 0
             }
         })
-    })
 }
 
 day!(2023 16, 7543, 8231);
