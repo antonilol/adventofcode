@@ -1,3 +1,4 @@
+pub mod dir;
 pub mod ext;
 pub mod sequence;
 
