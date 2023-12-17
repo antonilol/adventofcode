@@ -1,4 +1,4 @@
-use core::mem::transmute;
+use core::{fmt, mem::transmute};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Direction {
@@ -64,5 +64,11 @@ impl Direction {
 
     pub fn is_vertical(self) -> bool {
         !self.is_horizontal()
+    }
+}
+
+impl fmt::Display for Direction {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        fmt::Debug::fmt(&self, f)
     }
 }
