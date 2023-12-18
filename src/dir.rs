@@ -65,6 +65,14 @@ impl Direction {
     pub fn is_vertical(self) -> bool {
         !self.is_horizontal()
     }
+
+    pub fn is_positive(self) -> bool {
+        matches!(self, Self::Right | Self::Down)
+    }
+
+    pub fn is_negative(self) -> bool {
+        !self.is_positive()
+    }
 }
 
 impl fmt::Display for Direction {
