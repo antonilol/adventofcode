@@ -1,7 +1,6 @@
+use adventofcode::{day, dir::Direction, ext::intoiterator::IntoIteratorExt};
 use core::mem::swap;
 use std::collections::{HashSet, VecDeque};
-
-use adventofcode::{day, dir::Direction, ext::intoiterator::IntoIteratorExt};
 
 #[derive(Clone)]
 struct Tile {
@@ -14,10 +13,10 @@ fn solve(input: &str) -> (usize, usize) {
         .map(|line| {
             let mut split = line.split(' ');
             let dir = match split.next().unwrap() {
-                "L" => Direction::Left,
                 "U" => Direction::Up,
                 "R" => Direction::Right,
                 "D" => Direction::Down,
+                "L" => Direction::Left,
                 _ => unreachable!(),
             };
             let dist = split.next().unwrap().parse::<u64>().unwrap();
@@ -96,10 +95,10 @@ fn solve(input: &str) -> (usize, usize) {
             let color = split.next().unwrap();
             let dist = u64::from_str_radix(&color[2..color.len() - 2], 16).unwrap();
             let dir = match color.as_bytes()[color.len() - 2] {
-                b'2' => Direction::Left,
                 b'3' => Direction::Up,
                 b'0' => Direction::Right,
                 b'1' => Direction::Down,
+                b'2' => Direction::Left,
                 _ => unreachable!(),
             };
 
