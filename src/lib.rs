@@ -1,5 +1,6 @@
 pub mod dir;
 pub mod ext;
+pub mod math;
 pub mod sequence;
 
 // TODO get $y and $d from binary name (proc macro? (proc_macro_span?))

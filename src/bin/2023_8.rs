@@ -1,23 +1,5 @@
-use adventofcode::day;
+use adventofcode::{day, math::lcm};
 use std::collections::HashMap;
-
-fn lcm(a: u64, b: u64) -> u64 {
-    a * b / gcd(a, b)
-}
-
-fn gcd(a: u64, b: u64) -> u64 {
-    let (mut min, mut max) = if a < b { (a, b) } else { (b, a) };
-
-    loop {
-        let res = max % min;
-        if res == 0 {
-            return min;
-        }
-
-        max = min;
-        min = res;
-    }
-}
 
 fn steps(instr: &[u8], network: &HashMap<&str, (&str, &str)>, start: &str, part2: bool) -> u64 {
     let mut instr = instr.iter().cycle();
